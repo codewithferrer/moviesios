@@ -44,6 +44,7 @@
 		AF84F0CC2887B742005CE41D /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		AF84F0CF2887B79B005CE41D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		AF84F0D42887B805005CE41D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AFF3F35E28A36FAD000EB305 /* ConfigKeys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ConfigKeys.xcconfig; sourceTree = "<group>"; };
 		AFFEEA0C2872A6BB00220586 /* movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFEEA0F2872A6BB00220586 /* moviesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moviesApp.swift; sourceTree = "<group>"; };
 		AFFEEA112872A6BB00220586 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -112,6 +113,7 @@
 		AFFEEA032872A6BA00220586 = {
 			isa = PBXGroup;
 			children = (
+				AFF3F35E28A36FAD000EB305 /* ConfigKeys.xcconfig */,
 				AF84F0D12887B7D6005CE41D /* views */,
 				AF84F0CE2887B78B005CE41D /* viewmodel */,
 				AF84F0CB2887B72C005CE41D /* model */,
