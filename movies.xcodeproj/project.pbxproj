@@ -10,6 +10,7 @@
 		AF84F0CD2887B742005CE41D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F0CC2887B742005CE41D /* Movie.swift */; };
 		AF84F0D02887B79B005CE41D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F0CF2887B79B005CE41D /* HomeViewModel.swift */; };
 		AF84F0D52887B805005CE41D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F0D42887B805005CE41D /* HomeView.swift */; };
+		AFF3F36328A4C27D000EB305 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF3F36228A4C27D000EB305 /* Configuration.swift */; };
 		AFFEEA102872A6BB00220586 /* moviesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFEEA0F2872A6BB00220586 /* moviesApp.swift */; };
 		AFFEEA122872A6BB00220586 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFEEA112872A6BB00220586 /* ContentView.swift */; };
 		AFFEEA142872A6BD00220586 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFFEEA132872A6BD00220586 /* Assets.xcassets */; };
@@ -45,6 +46,8 @@
 		AF84F0CF2887B79B005CE41D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		AF84F0D42887B805005CE41D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		AFF3F35E28A36FAD000EB305 /* ConfigKeys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ConfigKeys.xcconfig; sourceTree = "<group>"; };
+		AFF3F36028A4C19D000EB305 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFF3F36228A4C27D000EB305 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		AFFEEA0C2872A6BB00220586 /* movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFEEA0F2872A6BB00220586 /* moviesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moviesApp.swift; sourceTree = "<group>"; };
 		AFFEEA112872A6BB00220586 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,9 +113,18 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		AFF3F36128A4C267000EB305 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				AFF3F36228A4C27D000EB305 /* Configuration.swift */,
+			);
+			path = services;
+			sourceTree = "<group>";
+		};
 		AFFEEA032872A6BA00220586 = {
 			isa = PBXGroup;
 			children = (
+				AFF3F36128A4C267000EB305 /* services */,
 				AFF3F35E28A36FAD000EB305 /* ConfigKeys.xcconfig */,
 				AF84F0D12887B7D6005CE41D /* views */,
 				AF84F0CE2887B78B005CE41D /* viewmodel */,
@@ -137,6 +149,7 @@
 		AFFEEA0E2872A6BB00220586 /* movies */ = {
 			isa = PBXGroup;
 			children = (
+				AFF3F36028A4C19D000EB305 /* Info.plist */,
 				AFFEEA0F2872A6BB00220586 /* moviesApp.swift */,
 				AFFEEA112872A6BB00220586 /* ContentView.swift */,
 				AFFEEA132872A6BD00220586 /* Assets.xcassets */,
@@ -311,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF3F36328A4C27D000EB305 /* Configuration.swift in Sources */,
 				AFFEEA122872A6BB00220586 /* ContentView.swift in Sources */,
 				AFFEEA102872A6BB00220586 /* moviesApp.swift in Sources */,
 				AF84F0CD2887B742005CE41D /* Movie.swift in Sources */,
@@ -354,6 +368,7 @@
 /* Begin XCBuildConfiguration section */
 		AFFEEA2E2872A6BE00220586 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFF3F35E28A36FAD000EB305 /* ConfigKeys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -414,6 +429,7 @@
 		};
 		AFFEEA2F2872A6BE00220586 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFF3F35E28A36FAD000EB305 /* ConfigKeys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -477,6 +493,7 @@
 				DEVELOPMENT_TEAM = PYH5XH3SJ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = movies/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -506,6 +523,7 @@
 				DEVELOPMENT_TEAM = PYH5XH3SJ7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = movies/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
