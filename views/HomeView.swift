@@ -12,9 +12,18 @@ struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel = HomeViewModel()
     
     var body: some View {
-        VStack {
-            ForEach(viewModel.movies) { movie in
-                Text(movie.title)
+        NavigationView {
+            VStack(alignment: .leading, spacing: 4.0) {
+                ForEach(viewModel.movies) { movie in
+                    NavigationLink(
+                        destination: MovieView(movieId: movie.id)
+                    ) {
+                        Text(movie.title)
+                            .font(.title2)
+                    }
+                    
+                }
+                Spacer()
             }
         }.onAppear {
             viewModel.loadMovies()
@@ -22,8 +31,17 @@ struct HomeView: View {
     }
 }
 
+
+#if DEBUG
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        var view = HomeView()
+        
+        let viewModel = MockHomeViewModel()
+        view.viewModel = viewModel
+        
+        return view
     }
 }
+#endif
+
