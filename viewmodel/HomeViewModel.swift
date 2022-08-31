@@ -7,18 +7,18 @@
 
 import SwiftUI
 import Combine
+import Factory
 
 class HomeViewModel: ObservableObject {
     
-    private let apiRestClient: ApiRestClient
-    private let configuration: Configuration
+    @Injected(Container.apiRestClientService) private var apiRestClient: ApiRestClient
+    
     private var cancellableSet: Set<AnyCancellable> = []
     
     @Published var movies: [Movie] = []
     
     init() {
-        self.configuration = Configuration()
-        self.apiRestClient = ApiRestClient(configuration: configuration)
+        
     }
     
     func loadMovies() {

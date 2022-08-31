@@ -7,19 +7,18 @@
 
 import SwiftUI
 import Combine
+import Factory
 
 class MovieViewModel: ObservableObject {
     
-    private let apiRestClient: ApiRestClient
-    private let configuration: Configuration
+    @Injected(Container.apiRestClientService) private var apiRestClient: ApiRestClient
     
     @Published var movie: Movie? = nil
     
     private var cancellableSet: Set<AnyCancellable> = []
         
     init() {
-        self.configuration = Configuration()
-        self.apiRestClient = ApiRestClient(configuration: configuration)
+        
     }
     
     func loadMovie(movieId: String) {

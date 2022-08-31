@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Factory
 
 struct MovieView: View {
     
-    @ObservedObject var viewModel: MovieViewModel = MovieViewModel()
+    @ObservedObject var viewModel: MovieViewModel = Container.movieViewModel()
     
     var movieId: String
     
@@ -29,12 +30,8 @@ struct MovieView: View {
 #if DEBUG
 struct MovieView_Previews: PreviewProvider {
     static var previews: some View {
-        var view = MovieView(movieId: moviesTest[0].id)
-        let viewModel = MockMovieViewModel()
-        
-        view.viewModel = viewModel
-        
-        return view
+        let _ = Container.movieViewModel.register { MockMovieViewModel() }
+        MovieView(movieId: moviesTest[0].id)
     }
 }
 #endif

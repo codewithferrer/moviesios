@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Factory
 
 struct HomeView: View {
     
-    @ObservedObject var viewModel: HomeViewModel = HomeViewModel()
+    @ObservedObject var viewModel: HomeViewModel = Container.homeViewModel()
     
     var body: some View {
         NavigationView {
@@ -35,13 +36,8 @@ struct HomeView: View {
 #if DEBUG
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        var view = HomeView()
-        
-        let viewModel = MockHomeViewModel()
-        view.viewModel = viewModel
-        
-        return view
+        let _ = Container.homeViewModel.register { MockHomeViewModel() }
+        HomeView()
     }
 }
 #endif
-

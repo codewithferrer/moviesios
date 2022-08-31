@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF4E9D7E28BB4FD200D9A9BB /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = AF4E9D7D28BB4FD200D9A9BB /* Factory */; };
 		AF84F0CD2887B742005CE41D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F0CC2887B742005CE41D /* Movie.swift */; };
 		AF84F0D02887B79B005CE41D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F0CF2887B79B005CE41D /* HomeViewModel.swift */; };
 		AF84F0D52887B805005CE41D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F0D42887B805005CE41D /* HomeView.swift */; };
@@ -16,6 +17,7 @@
 		AFF5968428B11C2200069838 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF5968328B11C2200069838 /* ApiService.swift */; };
 		AFF5968628B1F4DA00069838 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF5968528B1F4DA00069838 /* MovieView.swift */; };
 		AFF5968828B1FBCC00069838 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF5968728B1FBCC00069838 /* MovieViewModel.swift */; };
+		AFFAB6CF28BAAF030086D2A0 /* AppInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFAB6CE28BAAF030086D2A0 /* AppInjection.swift */; };
 		AFFEEA102872A6BB00220586 /* moviesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFEEA0F2872A6BB00220586 /* moviesApp.swift */; };
 		AFFEEA122872A6BB00220586 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFEEA112872A6BB00220586 /* ContentView.swift */; };
 		AFFEEA142872A6BD00220586 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFFEEA132872A6BD00220586 /* Assets.xcassets */; };
@@ -24,9 +26,6 @@
 		AFFEEA2B2872A6BE00220586 /* moviesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFEEA2A2872A6BE00220586 /* moviesUITests.swift */; };
 		AFFEEA2D2872A6BE00220586 /* moviesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFFEEA2C2872A6BE00220586 /* moviesUITestsLaunchTests.swift */; };
 		AFFEEA3B2872A77600220586 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AFFEEA3A2872A77600220586 /* Alamofire */; };
-		AFFEEA3E2872A7E300220586 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AFFEEA3D2872A7E300220586 /* Realm */; };
-		AFFEEA402872A7E300220586 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AFFEEA3F2872A7E300220586 /* RealmSwift */; };
-		AFFEEA432872A89500220586 /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = AFFEEA422872A89500220586 /* Resolver */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +57,7 @@
 		AFF5968328B11C2200069838 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		AFF5968528B1F4DA00069838 /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		AFF5968728B1FBCC00069838 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
+		AFFAB6CE28BAAF030086D2A0 /* AppInjection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInjection.swift; sourceTree = "<group>"; };
 		AFFEEA0C2872A6BB00220586 /* movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFFEEA0F2872A6BB00220586 /* moviesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = moviesApp.swift; sourceTree = "<group>"; };
 		AFFEEA112872A6BB00220586 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,10 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFFEEA402872A7E300220586 /* RealmSwift in Frameworks */,
-				AFFEEA3E2872A7E300220586 /* Realm in Frameworks */,
-				AFFEEA432872A89500220586 /* Resolver in Frameworks */,
 				AFFEEA3B2872A77600220586 /* Alamofire in Frameworks */,
+				AF4E9D7E28BB4FD200D9A9BB /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,9 +141,18 @@
 			path = api;
 			sourceTree = "<group>";
 		};
+		AFFAB6CD28BAAEE50086D2A0 /* di */ = {
+			isa = PBXGroup;
+			children = (
+				AFFAB6CE28BAAF030086D2A0 /* AppInjection.swift */,
+			);
+			path = di;
+			sourceTree = "<group>";
+		};
 		AFFEEA032872A6BA00220586 = {
 			isa = PBXGroup;
 			children = (
+				AFFAB6CD28BAAEE50086D2A0 /* di */,
 				AFF5967E28B119F000069838 /* api */,
 				AFF3F36128A4C267000EB305 /* services */,
 				AFF3F35E28A36FAD000EB305 /* ConfigKeys.xcconfig */,
@@ -224,9 +231,7 @@
 			name = movies;
 			packageProductDependencies = (
 				AFFEEA3A2872A77600220586 /* Alamofire */,
-				AFFEEA3D2872A7E300220586 /* Realm */,
-				AFFEEA3F2872A7E300220586 /* RealmSwift */,
-				AFFEEA422872A89500220586 /* Resolver */,
+				AF4E9D7D28BB4FD200D9A9BB /* Factory */,
 			);
 			productName = movies;
 			productReference = AFFEEA0C2872A6BB00220586 /* movies.app */;
@@ -302,8 +307,7 @@
 			mainGroup = AFFEEA032872A6BA00220586;
 			packageReferences = (
 				AFFEEA392872A77600220586 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				AFFEEA3C2872A7E300220586 /* XCRemoteSwiftPackageReference "realm-swift" */,
-				AFFEEA412872A89500220586 /* XCRemoteSwiftPackageReference "Resolver" */,
+				AF4E9D7C28BB4FD200D9A9BB /* XCRemoteSwiftPackageReference "Factory" */,
 			);
 			productRefGroup = AFFEEA0D2872A6BB00220586 /* Products */;
 			projectDirPath = "";
@@ -348,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFF5968228B11AD800069838 /* ApiObjectMovie.swift in Sources */,
+				AFFAB6CF28BAAF030086D2A0 /* AppInjection.swift in Sources */,
 				AFF3F36328A4C27D000EB305 /* Configuration.swift in Sources */,
 				AFFEEA122872A6BB00220586 /* ContentView.swift in Sources */,
 				AFFEEA102872A6BB00220586 /* moviesApp.swift in Sources */,
@@ -688,6 +693,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AF4E9D7C28BB4FD200D9A9BB /* XCRemoteSwiftPackageReference "Factory" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Factory";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		AFFEEA392872A77600220586 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -696,44 +709,18 @@
 				kind = branch;
 			};
 		};
-		AFFEEA3C2872A7E300220586 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		AFFEEA412872A89500220586 /* XCRemoteSwiftPackageReference "Resolver" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hmlongco/Resolver.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AF4E9D7D28BB4FD200D9A9BB /* Factory */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF4E9D7C28BB4FD200D9A9BB /* XCRemoteSwiftPackageReference "Factory" */;
+			productName = Factory;
+		};
 		AFFEEA3A2872A77600220586 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AFFEEA392872A77600220586 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		AFFEEA3D2872A7E300220586 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AFFEEA3C2872A7E300220586 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		AFFEEA3F2872A7E300220586 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AFFEEA3C2872A7E300220586 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
-		AFFEEA422872A89500220586 /* Resolver */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AFFEEA412872A89500220586 /* XCRemoteSwiftPackageReference "Resolver" */;
-			productName = Resolver;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
