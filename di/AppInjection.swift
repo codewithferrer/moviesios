@@ -18,6 +18,18 @@ extension Container {
         ApiRestClient(configuration: configurationService())
     }
     
+    static let databaseManager = Factory(scope: .singleton) {
+        let configuration = DatabaseConfiguration(
+            databaseName: "movies",
+            type: .disk,
+            debug: .all,
+            schemaVersion: 1,
+            objectTypes: [MovieDB.self]
+        )
+        
+        return LocalDatabaseManager(configuration: configuration) as Database
+    }
+    
     //ViewModels
     static let homeViewModel = Factory() {
         HomeViewModel()
