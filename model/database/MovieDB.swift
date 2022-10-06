@@ -24,3 +24,18 @@ class MovieDB: Object {
         self.posterPath = posterPath
     }
 }
+
+extension MovieDB {
+    
+    static func build(apiItem: ApiObjectMovie, urlImages: String) -> MovieDB {
+        
+        let absoluteUrl: String = "\(urlImages)\(apiItem.poster_path)"
+        
+        return MovieDB(id: String(apiItem.id),
+                       imdbId: nil,
+                       title: apiItem.original_title,
+                       overView: apiItem.overview,
+                       posterPath: absoluteUrl)
+    }
+    
+}

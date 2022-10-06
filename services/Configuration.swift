@@ -11,4 +11,6 @@ class Configuration {
     
     let apiKey: String? = Bundle.main.infoDictionary?["API_KEY"] as? String
     
+    let urlImages: String = "https://image.tmdb.org/t/p/original"
+    
 }

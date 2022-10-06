@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF4C33E028EE8E0A00CE0183 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AF4C33DF28EE8E0A00CE0183 /* Kingfisher */; };
+		AF4C33E228EE8E4500CE0183 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4C33E128EE8E4500CE0183 /* ImageView.swift */; };
 		AF4E9D7E28BB4FD200D9A9BB /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = AF4E9D7D28BB4FD200D9A9BB /* Factory */; };
 		AF70CC5E28DEC38D006A7D8F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AF70CC5D28DEC38D006A7D8F /* Realm */; };
 		AF70CC6028DEC38D006A7D8F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AF70CC5F28DEC38D006A7D8F /* RealmSwift */; };
@@ -55,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF4C33E128EE8E4500CE0183 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		AF70CC6228DEC425006A7D8F /* MovieDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDB.swift; sourceTree = "<group>"; };
 		AF70CC6528DEC5D6006A7D8F /* DatabaseWriteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseWriteType.swift; sourceTree = "<group>"; };
 		AF70CC6728DEC60E006A7D8F /* DatabaseDebugVerbosity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDebugVerbosity.swift; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 				AF70CC5E28DEC38D006A7D8F /* Realm in Frameworks */,
 				AFFEEA3B2872A77600220586 /* Alamofire in Frameworks */,
 				AF4E9D7E28BB4FD200D9A9BB /* Factory in Frameworks */,
+				AF4C33E028EE8E0A00CE0183 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +163,7 @@
 			children = (
 				AF84F0D42887B805005CE41D /* HomeView.swift */,
 				AFF5968528B1F4DA00069838 /* MovieView.swift */,
+				AF4C33E128EE8E4500CE0183 /* ImageView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 				AF4E9D7D28BB4FD200D9A9BB /* Factory */,
 				AF70CC5D28DEC38D006A7D8F /* Realm */,
 				AF70CC5F28DEC38D006A7D8F /* RealmSwift */,
+				AF4C33DF28EE8E0A00CE0183 /* Kingfisher */,
 			);
 			productName = movies;
 			productReference = AFFEEA0C2872A6BB00220586 /* movies.app */;
@@ -352,6 +358,7 @@
 				AFFEEA392872A77600220586 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				AF4E9D7C28BB4FD200D9A9BB /* XCRemoteSwiftPackageReference "Factory" */,
 				AF70CC5C28DEC38D006A7D8F /* XCRemoteSwiftPackageReference "realm-swift" */,
+				AF4C33DE28EE8E0A00CE0183 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = AFFEEA0D2872A6BB00220586 /* Products */;
 			projectDirPath = "";
@@ -395,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF4C33E228EE8E4500CE0183 /* ImageView.swift in Sources */,
 				AF70CC6328DEC425006A7D8F /* MovieDB.swift in Sources */,
 				AFF5968228B11AD800069838 /* ApiObjectMovie.swift in Sources */,
 				AF70CC6628DEC5D6006A7D8F /* DatabaseWriteType.swift in Sources */,
@@ -744,6 +752,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AF4C33DE28EE8E0A00CE0183 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		AF4E9D7C28BB4FD200D9A9BB /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory";
@@ -771,6 +787,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AF4C33DF28EE8E0A00CE0183 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF4C33DE28EE8E0A00CE0183 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		AF4E9D7D28BB4FD200D9A9BB /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF4E9D7C28BB4FD200D9A9BB /* XCRemoteSwiftPackageReference "Factory" */;

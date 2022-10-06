@@ -14,6 +14,7 @@ class MovieViewModel: ObservableObject {
     
     @Injected(Container.apiRestClientService) private var apiRestClient: ApiRestClient
     @Injected(Container.databaseManager) private var databaseManager: Database
+    @Injected(Container.configurationService) private var configuration: Configuration
     
     @Published var movie: Movie? = nil
     
@@ -33,11 +34,7 @@ class MovieViewModel: ObservableObject {
                     if let apiItem = dataResponse.value {
                         
                         var objects: [Object] = []
-                        let movie = MovieDB(id: String(apiItem.id),
-                                imdbId: nil,
-                                title: apiItem.original_title,
-                                overView: apiItem.overview,
-                                posterPath: apiItem.poster_path)
+                        let movie = MovieDB.build(apiItem: apiItem, urlImages: self.configuration.urlImages)
                         
                         objects.append(movie)
                         

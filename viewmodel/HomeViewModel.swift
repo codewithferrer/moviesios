@@ -14,6 +14,7 @@ class HomeViewModel: ObservableObject {
     
     @Injected(Container.apiRestClientService) private var apiRestClient: ApiRestClient
     @Injected(Container.databaseManager) private var databaseManager: Database
+    @Injected(Container.configurationService) private var configuration: Configuration
     
     private var cancellableSet: Set<AnyCancellable> = []
     
@@ -30,11 +31,7 @@ class HomeViewModel: ObservableObject {
                     print(dataResponse.error.debugDescription)
                 } else {
                     let objects: [Object] = dataResponse.value?.results.compactMap({ apiItem in
-                        MovieDB(id: String(apiItem.id),
-                                imdbId: nil,
-                                title: apiItem.original_title,
-                                overView: apiItem.overview,
-                                posterPath: apiItem.poster_path)
+                        MovieDB.build(apiItem: apiItem, urlImages: self.configuration.urlImages)
                     }) ?? []
                     
                     try? self.databaseManager.save(objects: objects)
