@@ -17,28 +17,18 @@ class HomeViewModel: ObservableObject {
     @Injected(Container.configurationService) private var configuration: Configuration
     
     private var cancellableSet: Set<AnyCancellable> = []
+    private var numPage: Int = 0
     
     @Published var movies: [Movie] = []
+    @Published var loadMoreState: LoadMoreState = LoadMoreState(isRunning: false, hasMorePages: true)
     
     init() {
         
     }
     
     func loadMovies() {
-        apiRestClient.fetchPopularMovies()
-            .sink { (dataResponse) in
-                if dataResponse.error != nil {
-                    print(dataResponse.error.debugDescription)
-                } else {
-                    let objects: [Object] = dataResponse.value?.results.compactMap({ apiItem in
-                        MovieDB.build(apiItem: apiItem, urlImages: self.configuration.urlImages)
-                    }) ?? []
-                    
-                    try? self.databaseManager.save(objects: objects)
-                }
-            }
-            .store(in: &cancellableSet)
         
+        loadNextPage()
         
         try? databaseManager.get(type: MovieDB.self)
             .collectionPublisher
@@ -54,6 +44,45 @@ class HomeViewModel: ObservableObject {
             .store(in: &cancellableSet)
     }
     
+    private func loadFromAPI(page: Int) {
+        apiRestClient.fetchPopularMovies(page: page)
+            .sink { (dataResponse) in
+                if dataResponse.error != nil {
+                    print(dataResponse.error.debugDescription)
+                    self.loadMoreState = LoadMoreState(isRunning: false, hasMorePages: false)
+                } else {
+                    let objects: [Object] = dataResponse.value?.results.compactMap({ apiItem in
+                        MovieDB.build(apiItem: apiItem, urlImages: self.configuration.urlImages)
+                    }) ?? []
+                    
+                    if page == 1 {
+                        try? self.databaseManager.delete(type: MovieDB.self)
+                    }
+                    
+                    try? self.databaseManager.save(objects: objects)
+                    
+                    self.loadMoreState = LoadMoreState(isRunning: false, hasMorePages: !objects.isEmpty)
+                }
+            }
+            .store(in: &cancellableSet)
+    }
+    
+    func loadNextPage() {
+        if self.loadMoreState.isRunning || !self.loadMoreState.hasMorePages {
+            return
+        }
+        
+        self.loadMoreState = LoadMoreState(isRunning: true, hasMorePages: true)
+        
+        numPage += 1
+        loadFromAPI(page: numPage)
+    }
+    
+}
+
+struct LoadMoreState {
+    let isRunning: Bool
+    let hasMorePages: Bool
 }
 
 

@@ -27,7 +27,7 @@ struct ConfigError: Error {
 
 protocol ApiServiceProtocol {
     
-    func fetchPopularMovies() -> AnyPublisher<DataResponse<ApiObjectPaginator<ApiObjectMovie>, ApiRestError>, Never>
+    func fetchPopularMovies(page: Int) -> AnyPublisher<DataResponse<ApiObjectPaginator<ApiObjectMovie>, ApiRestError>, Never>
     
     func fetchMovie(movieId: String) -> AnyPublisher<DataResponse<ApiObjectMovie, ApiRestError>, Never>
     
@@ -46,9 +46,9 @@ class ApiRestClient {
 
 extension ApiRestClient: ApiServiceProtocol {
     
-    func fetchPopularMovies() -> AnyPublisher<DataResponse<ApiObjectPaginator<ApiObjectMovie>, ApiRestError>, Never> {
+    func fetchPopularMovies(page: Int) -> AnyPublisher<DataResponse<ApiObjectPaginator<ApiObjectMovie>, ApiRestError>, Never> {
         guard let apiKey = configuration.apiKey,
-            let url = URL(string: "\(urlBase)popular?\(APIKEY_NAME)=\(apiKey)") else {
+            let url = URL(string: "\(urlBase)popular?page=\(page)&\(APIKEY_NAME)=\(apiKey)") else {
                 return emptyPublisher(error: ConfigError(code: 555, message: "No URL defined"))
         }
         

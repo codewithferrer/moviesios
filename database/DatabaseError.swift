@@ -8,5 +8,5 @@
 import Foundation
 
 enum DatabaseError: Error {
-    case databaseNameError, configurationError, instanceNotAvailable, cannotSaveError
+    case databaseNameError, configurationError, instanceNotAvailable, cannotSaveError, cannotDeleteError
 }

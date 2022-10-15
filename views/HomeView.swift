@@ -19,22 +19,57 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 4.0) {
-                    ForEach(viewModel.movies) { movie in
-                        NavigationLink(
-                            destination: MovieView(movieId: movie.id)
-                        ) {
-                            MovieViewCell(movie: movie)
+            ZStack(alignment: .bottom) {
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 4.0) {
+                        ForEach(viewModel.movies) { movie in
+                            NavigationLink(
+                                destination: MovieView(movieId: movie.id)
+                            ) {
+                                MovieViewCell(movie: movie)
+                            }
+                            
                         }
                         
-                    }
-                    Spacer()
-                }.padding(.horizontal)
+                        if !viewModel.loadMoreState.isRunning &&
+                            viewModel.loadMoreState.hasMorePages {
+                            Text("").onAppear {
+                                viewModel.loadNextPage()
+                            }
+                        }
+                        Spacer()
+                    }.padding(.horizontal)
+                }
+                
+                if viewModel.loadMoreState.isRunning {
+                    IndeterminateProgressView()
+                }
             }
         }.onAppear {
             viewModel.loadMovies()
         }
+    }
+}
+
+struct IndeterminateProgressView: View {
+    @State private var downloadAmount = 0.0
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    
+    var body: some View {
+        ProgressView("", value: downloadAmount, total: 100)
+            .frame(height: 2)
+            .padding(0)
+            
+            .onReceive(timer) { _ in
+                if downloadAmount < 100 {
+                    downloadAmount += 2
+                } else {
+                    downloadAmount = 0
+                }
+            }
+            .onAppear {
+                downloadAmount = 0
+            }
     }
 }
 

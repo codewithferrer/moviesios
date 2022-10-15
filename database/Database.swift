@@ -19,6 +19,9 @@ protocol Database: AnyObject {
     
     func save<S: Sequence>(objects: S) throws where S.Iterator.Element: Object
     
+    func delete<T: Object>(type: T.Type) throws
+    func delete<T: Object>(type: T.Type, query: ((Query<T>) -> Query<Bool>)) throws
+    
     func debug(error: String)
     func debug(data: String)
     
@@ -67,6 +70,46 @@ extension Database {
             throw DatabaseError.cannotSaveError
         }
     }
+}
+
+//DELETE
+extension Database {
+    
+    func delete<T: Object>(type: T.Type) throws {
+        guard let database = database else {
+            debug(error: DatabaseError.instanceNotAvailable.localizedDescription)
+            throw DatabaseError.instanceNotAvailable
+        }
+        
+        do {
+            try database.write {
+                let results = database.objects(type)
+                database.delete(results)
+            }
+        } catch(let e) {
+            debug(error: e.localizedDescription)
+            throw DatabaseError.cannotDeleteError
+        }
+    }
+    
+    func delete<T: Object>(type: T.Type, query: ((Query<T>) -> Query<Bool>)) throws {
+        guard let database = database else {
+            debug(error: DatabaseError.instanceNotAvailable.localizedDescription)
+            throw DatabaseError.instanceNotAvailable
+        }
+        
+        do {
+            try database.write {
+                let results = database.objects(type).where(query)
+                database.delete(results)
+            }
+        } catch(let e) {
+            debug(error: e.localizedDescription)
+            throw DatabaseError.cannotDeleteError
+        }
+        
+    }
+    
 }
 
 //DEBUG
