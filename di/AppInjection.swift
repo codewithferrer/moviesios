@@ -39,4 +39,13 @@ extension Container {
         MovieViewModel()
     }
     
+    //Repositories
+    static let moviesRepository = Factory() {
+        MoviesRepository(apiRestClient: apiRestClientService(), databaseManager: databaseManager(), configuration: configurationService())
+    }
+    
+    static let movieRepository = Factory() {
+        MovieRepository(apiRestClient: apiRestClientService(), databaseManager: databaseManager(), configuration: configurationService())
+    }
+    
 }

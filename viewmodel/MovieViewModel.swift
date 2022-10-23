@@ -12,56 +12,20 @@ import RealmSwift
 
 class MovieViewModel: ObservableObject {
     
-    @Injected(Container.apiRestClientService) private var apiRestClient: ApiRestClient
-    @Injected(Container.databaseManager) private var databaseManager: Database
-    @Injected(Container.configurationService) private var configuration: Configuration
+    @Injected(Container.movieRepository) private var repository: MovieRepository
     
     @Published var movie: Movie? = nil
     
     private var cancellableSet: Set<AnyCancellable> = []
         
     init() {
-        
+        repository.$result.compactMap { $0 }
+            .assign(to: \.movie, on: self)
+            .store(in: &cancellableSet)
     }
     
     func loadMovie(movieId: String) {
-        apiRestClient
-            .fetchMovie(movieId: movieId)
-            .sink { (dataResponse) in
-                if dataResponse.error != nil {
-                    print(dataResponse.error.debugDescription)
-                } else {
-                    if let apiItem = dataResponse.value {
-                        
-                        var objects: [Object] = []
-                        let movie = MovieDB.build(apiItem: apiItem, urlImages: self.configuration.urlImages)
-                        
-                        objects.append(movie)
-                        
-                        try? self.databaseManager.save(objects: objects)
-                        
-                    }
-                }
-            }
-            .store(in: &cancellableSet)
-        
-        
-        try? databaseManager.get(type: MovieDB.self) { $0.id == movieId }
-            .collectionPublisher
-            .subscribe(on: DispatchQueue(label: "background queue"))
-            .freeze()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in
-            },receiveValue: { results in
-                if let _movie = results.last {
-                    self.movie = Movie(id: _movie.id, imdbId: _movie.imdbId, title: _movie.title, overView: _movie.overView, posterPath: _movie.posterPath)
-                } else {
-                    self.movie = nil
-                }
-                
-                
-            })
-            .store(in: &cancellableSet)
+        repository.loadMovie(movieId: movieId)
     }
     
 }
