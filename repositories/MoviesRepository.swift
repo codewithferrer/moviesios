@@ -34,7 +34,7 @@ class MoviesRepository: NetworkBoundResource<[Movie], MovieDB, ApiObjectPaginato
     }
     
     override func convertFromDatabaseToResults(data: Results<MovieDB>) -> [Movie]? {
-        data.compactMap {
+        return data.compactMap {
             Movie(id: $0.id, imdbId: $0.imdbId, title: $0.title, overView: $0.overView, posterPath: $0.posterPath)
         }
     }
