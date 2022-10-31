@@ -10,6 +10,7 @@ import Combine
 import Alamofire
 import SwiftUI
 import RealmSwift
+import RealmDataManager
 
 class MoviesRepository: NetworkBoundResource<[Movie], MovieDB, ApiObjectPaginator<ApiObjectMovie>> {
     

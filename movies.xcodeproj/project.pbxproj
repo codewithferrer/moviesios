@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF21CB15290F9E0000FACE4A /* RealmDataManager in Frameworks */ = {isa = PBXBuildFile; productRef = AF21CB14290F9E0000FACE4A /* RealmDataManager */; };
 		AF4377642903C3A50012A728 /* MoviesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4377632903C3A50012A728 /* MoviesRepository.swift */; };
 		AF4377662903C6350012A728 /* NetworkBoundResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4377652903C6350012A728 /* NetworkBoundResource.swift */; };
 		AF4377682903CCEB0012A728 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4377672903CCEB0012A728 /* MovieRepository.swift */; };
@@ -16,12 +17,6 @@
 		AF70CC5E28DEC38D006A7D8F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = AF70CC5D28DEC38D006A7D8F /* Realm */; };
 		AF70CC6028DEC38D006A7D8F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AF70CC5F28DEC38D006A7D8F /* RealmSwift */; };
 		AF70CC6328DEC425006A7D8F /* MovieDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF70CC6228DEC425006A7D8F /* MovieDB.swift */; };
-		AF70CC6628DEC5D6006A7D8F /* DatabaseWriteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF70CC6528DEC5D6006A7D8F /* DatabaseWriteType.swift */; };
-		AF70CC6828DEC60E006A7D8F /* DatabaseDebugVerbosity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF70CC6728DEC60E006A7D8F /* DatabaseDebugVerbosity.swift */; };
-		AF70CC6A28DEC647006A7D8F /* DatabaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF70CC6928DEC647006A7D8F /* DatabaseError.swift */; };
-		AF70CC6C28DEC698006A7D8F /* DatabaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF70CC6B28DEC698006A7D8F /* DatabaseConfiguration.swift */; };
-		AF70CC6E28DEC856006A7D8F /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF70CC6D28DEC856006A7D8F /* Database.swift */; };
-		AF70CC7028DECAC4006A7D8F /* LocalDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF70CC6F28DECAC4006A7D8F /* LocalDatabaseManager.swift */; };
 		AF84F0CD2887B742005CE41D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F0CC2887B742005CE41D /* Movie.swift */; };
 		AF84F0D02887B79B005CE41D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F0CF2887B79B005CE41D /* HomeViewModel.swift */; };
 		AF84F0D52887B805005CE41D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F0D42887B805005CE41D /* HomeView.swift */; };
@@ -65,12 +60,6 @@
 		AF4377672903CCEB0012A728 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
 		AF4C33E128EE8E4500CE0183 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		AF70CC6228DEC425006A7D8F /* MovieDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDB.swift; sourceTree = "<group>"; };
-		AF70CC6528DEC5D6006A7D8F /* DatabaseWriteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseWriteType.swift; sourceTree = "<group>"; };
-		AF70CC6728DEC60E006A7D8F /* DatabaseDebugVerbosity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseDebugVerbosity.swift; sourceTree = "<group>"; };
-		AF70CC6928DEC647006A7D8F /* DatabaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseError.swift; sourceTree = "<group>"; };
-		AF70CC6B28DEC698006A7D8F /* DatabaseConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseConfiguration.swift; sourceTree = "<group>"; };
-		AF70CC6D28DEC856006A7D8F /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		AF70CC6F28DECAC4006A7D8F /* LocalDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDatabaseManager.swift; sourceTree = "<group>"; };
 		AF84F0CC2887B742005CE41D /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		AF84F0CF2887B79B005CE41D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		AF84F0D42887B805005CE41D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -102,6 +91,7 @@
 			files = (
 				AF70CC6028DEC38D006A7D8F /* RealmSwift in Frameworks */,
 				AF70CC5E28DEC38D006A7D8F /* Realm in Frameworks */,
+				AF21CB15290F9E0000FACE4A /* RealmDataManager in Frameworks */,
 				AFFEEA3B2872A77600220586 /* Alamofire in Frameworks */,
 				AF4E9D7E28BB4FD200D9A9BB /* Factory in Frameworks */,
 				AF4C33E028EE8E0A00CE0183 /* Kingfisher in Frameworks */,
@@ -139,19 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				AF70CC6228DEC425006A7D8F /* MovieDB.swift */,
-			);
-			path = database;
-			sourceTree = "<group>";
-		};
-		AF70CC6428DEC5AF006A7D8F /* database */ = {
-			isa = PBXGroup;
-			children = (
-				AF70CC6528DEC5D6006A7D8F /* DatabaseWriteType.swift */,
-				AF70CC6728DEC60E006A7D8F /* DatabaseDebugVerbosity.swift */,
-				AF70CC6928DEC647006A7D8F /* DatabaseError.swift */,
-				AF70CC6B28DEC698006A7D8F /* DatabaseConfiguration.swift */,
-				AF70CC6D28DEC856006A7D8F /* Database.swift */,
-				AF70CC6F28DECAC4006A7D8F /* LocalDatabaseManager.swift */,
 			);
 			path = database;
 			sourceTree = "<group>";
@@ -214,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				AF4377622903C3900012A728 /* repositories */,
-				AF70CC6428DEC5AF006A7D8F /* database */,
 				AFFAB6CD28BAAEE50086D2A0 /* di */,
 				AFF5967E28B119F000069838 /* api */,
 				AFF3F36128A4C267000EB305 /* services */,
@@ -298,6 +274,7 @@
 				AF70CC5D28DEC38D006A7D8F /* Realm */,
 				AF70CC5F28DEC38D006A7D8F /* RealmSwift */,
 				AF4C33DF28EE8E0A00CE0183 /* Kingfisher */,
+				AF21CB14290F9E0000FACE4A /* RealmDataManager */,
 			);
 			productName = movies;
 			productReference = AFFEEA0C2872A6BB00220586 /* movies.app */;
@@ -376,6 +353,7 @@
 				AF4E9D7C28BB4FD200D9A9BB /* XCRemoteSwiftPackageReference "Factory" */,
 				AF70CC5C28DEC38D006A7D8F /* XCRemoteSwiftPackageReference "realm-swift" */,
 				AF4C33DE28EE8E0A00CE0183 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				AF21CB13290F9E0000FACE4A /* XCRemoteSwiftPackageReference "RealmDataManager-Swift" */,
 			);
 			productRefGroup = AFFEEA0D2872A6BB00220586 /* Products */;
 			projectDirPath = "";
@@ -423,22 +401,16 @@
 				AF4377642903C3A50012A728 /* MoviesRepository.swift in Sources */,
 				AF70CC6328DEC425006A7D8F /* MovieDB.swift in Sources */,
 				AFF5968228B11AD800069838 /* ApiObjectMovie.swift in Sources */,
-				AF70CC6628DEC5D6006A7D8F /* DatabaseWriteType.swift in Sources */,
-				AF70CC6828DEC60E006A7D8F /* DatabaseDebugVerbosity.swift in Sources */,
 				AF4377682903CCEB0012A728 /* MovieRepository.swift in Sources */,
 				AFFAB6CF28BAAF030086D2A0 /* AppInjection.swift in Sources */,
-				AF70CC7028DECAC4006A7D8F /* LocalDatabaseManager.swift in Sources */,
 				AFF3F36328A4C27D000EB305 /* Configuration.swift in Sources */,
-				AF70CC6E28DEC856006A7D8F /* Database.swift in Sources */,
 				AFFEEA122872A6BB00220586 /* ContentView.swift in Sources */,
 				AFFEEA102872A6BB00220586 /* moviesApp.swift in Sources */,
 				AFF5968028B11A1600069838 /* ApiObjectPaginator.swift in Sources */,
 				AFF5968628B1F4DA00069838 /* MovieView.swift in Sources */,
 				AFF5968428B11C2200069838 /* ApiService.swift in Sources */,
-				AF70CC6C28DEC698006A7D8F /* DatabaseConfiguration.swift in Sources */,
 				AF84F0CD2887B742005CE41D /* Movie.swift in Sources */,
 				AFF5968828B1FBCC00069838 /* MovieViewModel.swift in Sources */,
-				AF70CC6A28DEC647006A7D8F /* DatabaseError.swift in Sources */,
 				AF84F0D52887B805005CE41D /* HomeView.swift in Sources */,
 				AF84F0D02887B79B005CE41D /* HomeViewModel.swift in Sources */,
 				AF4377662903C6350012A728 /* NetworkBoundResource.swift in Sources */,
@@ -772,6 +744,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AF21CB13290F9E0000FACE4A /* XCRemoteSwiftPackageReference "RealmDataManager-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/3pies/RealmDataManager-Swift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		AF4C33DE28EE8E0A00CE0183 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -807,6 +787,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AF21CB14290F9E0000FACE4A /* RealmDataManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF21CB13290F9E0000FACE4A /* XCRemoteSwiftPackageReference "RealmDataManager-Swift" */;
+			productName = RealmDataManager;
+		};
 		AF4C33DF28EE8E0A00CE0183 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AF4C33DE28EE8E0A00CE0183 /* XCRemoteSwiftPackageReference "Kingfisher" */;

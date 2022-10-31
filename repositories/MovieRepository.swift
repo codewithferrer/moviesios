@@ -10,6 +10,7 @@ import Combine
 import Alamofire
 import SwiftUI
 import RealmSwift
+import RealmDataManager
 
 class MovieRepository: NetworkBoundResource<Movie, MovieDB, ApiObjectMovie> {
     
