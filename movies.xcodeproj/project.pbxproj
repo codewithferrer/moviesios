@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF1DAE132914E542000564E3 /* MovieRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1DAE122914E542000564E3 /* MovieRepositoryTest.swift */; };
+		AF1DAE162914E764000564E3 /* MockConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1DAE152914E764000564E3 /* MockConfiguration.swift */; };
+		AF1DAE182914E879000564E3 /* MockApiRestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1DAE172914E879000564E3 /* MockApiRestClient.swift */; };
+		AF1DAE1A2914E9A1000564E3 /* MockDatabaseBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1DAE192914E9A1000564E3 /* MockDatabaseBuilder.swift */; };
+		AF1DAE1C2914EB2D000564E3 /* MockApiObjectData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1DAE1B2914EB2D000564E3 /* MockApiObjectData.swift */; };
+		AF1DAE1E29183D04000564E3 /* MoviesRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1DAE1D29183D04000564E3 /* MoviesRepositoryTest.swift */; };
 		AF21CB15290F9E0000FACE4A /* RealmDataManager in Frameworks */ = {isa = PBXBuildFile; productRef = AF21CB14290F9E0000FACE4A /* RealmDataManager */; };
 		AF4377642903C3A50012A728 /* MoviesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4377632903C3A50012A728 /* MoviesRepository.swift */; };
 		AF4377662903C6350012A728 /* NetworkBoundResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4377652903C6350012A728 /* NetworkBoundResource.swift */; };
@@ -55,6 +61,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF1DAE122914E542000564E3 /* MovieRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepositoryTest.swift; sourceTree = "<group>"; };
+		AF1DAE152914E764000564E3 /* MockConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockConfiguration.swift; sourceTree = "<group>"; };
+		AF1DAE172914E879000564E3 /* MockApiRestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApiRestClient.swift; sourceTree = "<group>"; };
+		AF1DAE192914E9A1000564E3 /* MockDatabaseBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDatabaseBuilder.swift; sourceTree = "<group>"; };
+		AF1DAE1B2914EB2D000564E3 /* MockApiObjectData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockApiObjectData.swift; sourceTree = "<group>"; };
+		AF1DAE1D29183D04000564E3 /* MoviesRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRepositoryTest.swift; sourceTree = "<group>"; };
 		AF4377632903C3A50012A728 /* MoviesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRepository.swift; sourceTree = "<group>"; };
 		AF4377652903C6350012A728 /* NetworkBoundResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkBoundResource.swift; sourceTree = "<group>"; };
 		AF4377672903CCEB0012A728 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
@@ -115,6 +127,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF1DAE112914E515000564E3 /* repositories */ = {
+			isa = PBXGroup;
+			children = (
+				AF1DAE122914E542000564E3 /* MovieRepositoryTest.swift */,
+				AF1DAE1D29183D04000564E3 /* MoviesRepositoryTest.swift */,
+			);
+			path = repositories;
+			sourceTree = "<group>";
+		};
+		AF1DAE142914E748000564E3 /* mocks */ = {
+			isa = PBXGroup;
+			children = (
+				AF1DAE152914E764000564E3 /* MockConfiguration.swift */,
+				AF1DAE172914E879000564E3 /* MockApiRestClient.swift */,
+				AF1DAE192914E9A1000564E3 /* MockDatabaseBuilder.swift */,
+				AF1DAE1B2914EB2D000564E3 /* MockApiObjectData.swift */,
+			);
+			path = mocks;
+			sourceTree = "<group>";
+		};
 		AF4377622903C3900012A728 /* repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +270,8 @@
 		AFFEEA1F2872A6BE00220586 /* moviesTests */ = {
 			isa = PBXGroup;
 			children = (
+				AF1DAE142914E748000564E3 /* mocks */,
+				AF1DAE112914E515000564E3 /* repositories */,
 				AFFEEA202872A6BE00220586 /* moviesTests.swift */,
 			);
 			path = moviesTests;
@@ -421,7 +455,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF1DAE162914E764000564E3 /* MockConfiguration.swift in Sources */,
+				AF1DAE1A2914E9A1000564E3 /* MockDatabaseBuilder.swift in Sources */,
+				AF1DAE1E29183D04000564E3 /* MoviesRepositoryTest.swift in Sources */,
+				AF1DAE132914E542000564E3 /* MovieRepositoryTest.swift in Sources */,
 				AFFEEA212872A6BE00220586 /* moviesTests.swift in Sources */,
+				AF1DAE182914E879000564E3 /* MockApiRestClient.swift in Sources */,
+				AF1DAE1C2914EB2D000564E3 /* MockApiObjectData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

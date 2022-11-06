@@ -14,13 +14,13 @@ import RealmDataManager
 
 class MoviesRepository: NetworkBoundResource<[Movie], MovieDB, ApiObjectPaginator<ApiObjectMovie>> {
     
-    private var apiRestClient: ApiRestClient
+    private var apiRestClient: ApiServiceProtocol
     private var databaseManager: Database
-    private var configuration: Configuration
+    private var configuration: ConfigurationProtocol
     
     
     
-    init(apiRestClient: ApiRestClient, databaseManager: Database, configuration: Configuration) {
+    init(apiRestClient: ApiServiceProtocol, databaseManager: Database, configuration: ConfigurationProtocol) {
         self.apiRestClient = apiRestClient
         self.databaseManager = databaseManager
         self.configuration = configuration

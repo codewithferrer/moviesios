@@ -7,7 +7,12 @@
 
 import Foundation
 
-class Configuration {
+protocol ConfigurationProtocol {
+    var apiKey: String? { get }
+    var urlImages: String { get }
+}
+
+class Configuration: ConfigurationProtocol {
     
     let apiKey: String? = Bundle.main.infoDictionary?["API_KEY"] as? String
     
