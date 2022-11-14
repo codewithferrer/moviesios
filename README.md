@@ -4,4 +4,4 @@ Movies App is an application that has emerged from a test for an Android develop
 
 # how to install
 
-Open on XCode
+
