@@ -16,6 +16,5 @@ jobs:
         env:
           SECRET_WORD: ${{ secrets.SECRET_WORD }}
         run: |
-          ls ${{ github.workspace }}
-          echo $SECRET_WORD
+          echo "$SECRET_WORD - This is a secret word"
       - run: echo "🍏 This job's status is ${{ job.status }}."
