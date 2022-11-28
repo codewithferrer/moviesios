@@ -16,5 +16,7 @@ jobs:
         env:
           SECRET_WORD: ${{ secrets.SECRET_WORD }}
         run: |
-          echo "$SECRET_WORD - This is a secret word"
+          echo "This is a secret word"
+          echo $SECRET_WORD
+          echo "End
       - run: echo "🍏 This job's status is ${{ job.status }}."
