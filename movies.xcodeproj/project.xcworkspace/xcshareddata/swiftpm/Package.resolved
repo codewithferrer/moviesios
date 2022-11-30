@@ -6,7 +6,7 @@
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
         "branch" : "master",
-        "revision" : "bdecb2c87a21a236dcfe88b21532ad3f0e3d20f4"
+        "revision" : "78424be314842833c04bc3bef5b72e85fff99204"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hmlongco/Factory",
       "state" : {
-        "revision" : "8557426f3286e20b631ecdac8115242f888656e0",
-        "version" : "1.2.8"
+        "revision" : "ca5788b8621b185a0fbe6ef05bb9a73b3ef2833f",
+        "version" : "1.2.9"
       }
     },
     {
@@ -24,16 +24,16 @@
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
         "branch" : "master",
-        "revision" : "44e891bdb61426a95e31492a67c7c0dfad1f87c5"
+        "revision" : "3e091ee962391a2ddcae5b18e17bc625f9d88d6e"
       }
     },
     {
       "identity" : "realm-core",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-core",
+      "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "3c4b86da569368c4ee5ccca2a112d511cc6fa936",
-        "version" : "12.11.0"
+        "revision" : "a4fbfd3eb3d39fd4115ec2ae341e950357e170d2",
+        "version" : "12.12.0"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "https://github.com/realm/realm-swift.git",
       "state" : {
         "branch" : "master",
-        "revision" : "cedc1c8b0b2ab8506dd15703c36f8c0660774b18"
+        "revision" : "e0fdb803ef8d62caa97c2e8ca4f3bd09f5550737"
       }
     },
     {
