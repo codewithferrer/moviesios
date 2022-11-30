@@ -39,18 +39,9 @@ jobs:
           # apply provisioning profile
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
-          
-      - name: Set Default Scheme
-        run: |
-          scheme_list=$(xcodebuild -list -json | tr -d "\n")
-          default_scheme=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
-          echo $default_scheme | cat >default_scheme
-          echo Using default scheme: $default_scheme
-          
+                
       - name: Build iOS APP for Release Production
-        env:
-          scheme: ${{ 'default_scheme' }}
-        run: xcodebuild -scheme "$scheme" clean archive -archivePath "Actions" -configuration "Release Production"
+        run: xcodebuild -scheme "movies" clean archive -archivePath "Actions" -configuration "Release Production"
       
       - name: Export ipa
         env:
