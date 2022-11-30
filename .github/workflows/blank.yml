@@ -40,6 +40,26 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
           
+      - name: Set Default Scheme
+        run: |
+          scheme_list=$(xcodebuild -list -json | tr -d "\n")
+          default_scheme=$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['targets'][0]")
+          echo $default_scheme | cat >default_scheme
+          echo Using default scheme: $default_scheme
+          
+      - name: Build iOS APP for Release Production
+        env:
+          scheme: ${{ 'default_scheme' }}
+        run: xcodebuild -scheme "$scheme" clean archive -archivePath "Actions" -configuration "Release Production"
+      
+      - name: Export ipa
+        env:
+          EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
+        run: |
+          EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
+          echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
+          xcodebuild -exportArchive -archivePath $GITHUB_WORKSPACE/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export
+      
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
         run: |
