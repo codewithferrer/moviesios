@@ -42,7 +42,9 @@ jobs:
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
                 
       - name: Build iOS APP for Release Production
-        run: xcodebuild -scheme "movies" clean archive -archivePath "Actions" -configuration "Release Production" -clonedSourcePackagesDirPath "SourcePackages"  -allowProvisioningUpdates
+        run: |
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          xcodebuild -scheme "movies" clean archive -archivePath "Actions" -configuration "Release Production" -clonedSourcePackagesDirPath "SourcePackages"  -allowProvisioningUpdates "OTHER_CODE_SIGN_FLAGS=--keychain '$KEYCHAIN_PATH'"
       
       - name: Export ipa
         env:
