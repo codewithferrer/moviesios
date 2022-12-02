@@ -38,5 +38,5 @@ jobs:
       - name: Build iOS APP for Release Production
         run: |
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-          xcodebuild -scheme "movies" clean archive -archivePath "Actions" -configuration "Release Production" -clonedSourcePackagesDirPath "SourcePackages"  -allowProvisioningUpdates "OTHER_CODE_SIGN_FLAGS=--keychain '$KEYCHAIN_PATH'"
+          xcodebuild -scheme "movies" clean archive -archivePath "Actions" -configuration "Release Production" -clonedSourcePackagesDirPath "SourcePackages"
 
