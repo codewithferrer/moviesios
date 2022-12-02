@@ -40,3 +40,8 @@ jobs:
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
           xcodebuild -scheme "movies" clean archive -archivePath "Actions" -configuration "Release Production" -clonedSourcePackagesDirPath "SourcePackages"
 
+      - name: Clean up keychain and provisioning profile
+        if: ${{ always() }}
+        run: |
+          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
+          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
