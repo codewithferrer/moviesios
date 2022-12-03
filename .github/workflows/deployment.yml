@@ -43,7 +43,7 @@ jobs:
           echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
           # xcodebuild -scheme "movies" clean archive -archivePath "Actions" -configuration "Release" -allowProvisioningUpdates -clonedSourcePackagesDirPath "SourcePackages"
-          xcodebuild  -scheme "movies" -exportArchive -archivePath $GITHUB_WORKSPACE/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export  -clonedSourcePackagesDirPath "SourcePackages"  -allowProvisioningUpdates
+          xcodebuild -exportArchive -archivePath $GITHUB_WORKSPACE/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export  -clonedSourcePackagesDirPath "SourcePackages"  -allowProvisioningUpdates
       
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
