@@ -38,7 +38,7 @@ jobs:
       - name: Build iOS APP for Release Production
         run: |
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-          xcodebuild -scheme "movies" clean archive -archivePath "Actions" -configuration "Release" -clonedSourcePackagesDirPath "SourcePackages"
+          xcodebuild -scheme "movies" clean archive -archivePath "Actions" -configuration "Release" -allowProvisioningUpdates -clonedSourcePackagesDirPath "SourcePackages"
 
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
