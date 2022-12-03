@@ -36,21 +36,9 @@ jobs:
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
           
       - name: Build iOS APP for Release Production
-        env:
-          EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
         run: |
-          EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
-          echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
           xcodebuild -scheme "movies" clean archive -archivePath "Actions" -configuration "Release" -allowProvisioningUpdates -clonedSourcePackagesDirPath "SourcePackages"
           # xcodebuild -exportArchive -archivePath $GITHUB_WORKSPACE/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export  -clonedSourcePackagesDirPath "SourcePackages"  -allowProvisioningUpdates
-      
-      - name: Clean up keychain and provisioning profile
-        if: ${{ always() }}
-        run: |
-          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
-
 
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
