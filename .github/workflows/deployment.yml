@@ -43,7 +43,6 @@ jobs:
         env:
           EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
         run: |
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
           EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
           echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
           
