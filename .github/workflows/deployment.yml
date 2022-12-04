@@ -37,6 +37,7 @@ jobs:
           
       - name: Build iOS APP for Release Production
         run: |
+          set -eo pipefail
           xcodebuild -scheme "movies" \
                       clean archive \
                       -archivePath "Actions" 
@@ -53,6 +54,7 @@ jobs:
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
           EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
           echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
+          set -eo pipefail
           xcodebuild -exportArchive \
                       -archivePath $GITHUB_WORKSPACE/Actions.xcarchive \
                       -exportOptionsPlist $EXPORT_PLIST_PATH \
