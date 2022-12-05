@@ -37,7 +37,15 @@ jobs:
           
       - name: Build iOS APP for Release Production
         run: |
-          xcodebuild -scheme "movies" clean archive -archivePath "Actions" -configuration "Release" -clonedSourcePackagesDirPath "SourcePackages" CODE_SIGN_IDENTITY="Apple Distribution" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+          
+          xcodebuild -scheme "movies" \
+                    clean archive \
+                    -archivePath "Actions" \
+                    -configuration "Release" \
+                    -clonedSourcePackagesDirPath "SourcePackages" \
+                    CODE_SIGN_IDENTITY="Apple Distribution" \
+                    CODE_SIGNING_REQUIRED=NO \
+                    CODE_SIGNING_ALLOWED=NO
           
       - name: Export ipa
         env:
