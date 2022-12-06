@@ -39,12 +39,11 @@ jobs:
         run: |
           
           xcodebuild -scheme "movies" \
+                    -sdk iphoneos \
                     -archivePath "Actions" \
                     -configuration AppStoreDistribution \
-                    -clonedSourcePackagesDirPath "SourcePackages" \
                     clean archive
           
-            
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
         run: |
