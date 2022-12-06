@@ -70,7 +70,20 @@ jobs:
                     -exportOptionsPlist $EXPORT_PLIST_PATH \
                     -exportPath $RUNNER_TEMP/export \
                     -allowProvisioningUpdates
-                    
+          
+          ls $RUNNER_TEMP/export
+      
+      - name: Upload IPA
+        uses: actions/upload-artifact@master
+        with:
+          path: $RUNNER_TEMP/export/
+          
+      - name: Rename the file, remove withespace
+        run: | 
+          echo Export directory contents:
+          ls $RUNNER_TEMP/export/
+          
+          
           
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
