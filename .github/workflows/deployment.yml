@@ -77,14 +77,32 @@ jobs:
       - name: Upload IPA
         uses: actions/upload-artifact@master
         with:
-          path: $RUNNER_TEMP/export/
+          path: /Users/runner/work/_temp/export/
           
-      - name: Rename the file, remove withespace
+      - name: Decode auth, api key file and save it
+        env:
+          API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
         run: | 
-          echo Export directory contents:
-          ls $RUNNER_TEMP/export/
+          ls ~/private_keys
+          echo -n "$API_KEY_BASE64" | base64 --decode --output ~/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
+          echo "After saving: "
+          ls ~/private_keys
+      
+      - name: Upload file to testFlight
+        run: |
+          echo "Start upload"
+          ls ~/private_keys
+          xcrun altool --validate-app -f $RUNNER_TEMP/export/movies.ipa \
+                -t ios \
+                --apiKey ${{ secrets.APPSTORE_API_KEY_ID }} \
+                --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
+                
+          xcrun altool --upload-app -f $RUNNER_TEMP/export/movies.ipa \
+                -t ios \
+                --apiKey ${{ secrets.APPSTORE_API_KEY_ID }} \
+                --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
           
-          
+      
           
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
@@ -92,3 +110,4 @@ jobs:
           security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
           rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
           rm ~/Library/MobileDevice/Provisioning\ Profiles/moviesapp_profile.mobileprovision
+          rm ~/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
