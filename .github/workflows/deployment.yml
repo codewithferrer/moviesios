@@ -43,6 +43,17 @@ jobs:
                     -archivePath "Actions" \
                     -configuration "Release" \
                     -clonedSourcePackagesDirPath "SourcePackages" | xcpretty
+                    
+      - name: Export IPA
+        env:
+          EXPORT_PLIST: ${{ secrets.EXPORT_PLIST }}
+        run: |
+          EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
+          echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
+          xcodebuild -exportArchive \
+                    -archivePath $GITHUB_WORKSPACE/Actions.xcarchive \
+                    -exportOptionsPlist $EXPORT_PLIST_PATH \
+                    -exportPath $RUNNER_TEMP/export | xcpretty
           
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
