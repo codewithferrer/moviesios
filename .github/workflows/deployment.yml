@@ -83,6 +83,7 @@ jobs:
         env:
           API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
         run: | 
+          mkdir -p ~/private_keys
           ls ~/private_keys
           echo -n "$API_KEY_BASE64" | base64 --decode --output ~/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
           echo "After saving: "
