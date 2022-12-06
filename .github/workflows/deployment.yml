@@ -71,7 +71,8 @@ jobs:
                     -exportPath $RUNNER_TEMP/export \
                     -allowProvisioningUpdates
           
-          ls $RUNNER_TEMP/export
+          cd $RUNNER_TEMP/export
+          pwd
       
       - name: Upload IPA
         uses: actions/upload-artifact@master
