@@ -42,7 +42,7 @@ jobs:
                     clean archive \
                     -archivePath "Actions" \
                     -configuration "Release" \
-                    -clonedSourcePackagesDirPath "SourcePackages" | xcpretty
+                    -clonedSourcePackagesDirPath "SourcePackages"
                     
       - name: Export IPA
         env:
@@ -53,7 +53,7 @@ jobs:
           xcodebuild -exportArchive \
                     -archivePath $GITHUB_WORKSPACE/Actions.xcarchive \
                     -exportOptionsPlist $EXPORT_PLIST_PATH \
-                    -exportPath $RUNNER_TEMP/export | xcpretty
+                    -exportPath $RUNNER_TEMP/export
           
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
