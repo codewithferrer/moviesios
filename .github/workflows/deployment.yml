@@ -39,23 +39,12 @@ jobs:
         run: |
           
           xcodebuild -scheme "movies" \
-                    clean archive \
                     -archivePath "Actions" \
-                    -configuration "Release" \
+                    -configuration AppStoreDistribution \
                     -clonedSourcePackagesDirPath "SourcePackages" \
-                    CODE_SIGN_IDENTITY="Apple Distribution" \
-                    CODE_SIGNING_REQUIRED=NO \
-                    CODE_SIGNING_ALLOWED=NO
+                    clean archive
           
-      - name: Export ipa
-        env:
-          EXPORT_PLIST: ${{ secrets.IOS_EXPORT_PRODUCTION }}
-        run: |
-          EXPORT_PLIST_PATH=$RUNNER_TEMP/ExportOptions.plist
-          echo -n "$EXPORT_PLIST" | base64 --decode --output $EXPORT_PLIST_PATH
-          
-          xcodebuild -exportArchive -archivePath $GITHUB_WORKSPACE/Actions.xcarchive -exportOptionsPlist $EXPORT_PLIST_PATH -exportPath $RUNNER_TEMP/export
-      
+            
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
         run: |
