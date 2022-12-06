@@ -44,7 +44,6 @@ jobs:
                     -clonedSourcePackagesDirPath "SourcePackages" \
                     clean archive
           
-            
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
         run: |
