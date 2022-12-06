@@ -19,21 +19,12 @@
       }
     },
     {
-      "identity" : "kingfisher",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/onevcat/Kingfisher.git",
-      "state" : {
-        "branch" : "master",
-        "revision" : "3e091ee962391a2ddcae5b18e17bc625f9d88d6e"
-      }
-    },
-    {
       "identity" : "realm-core",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "a4fbfd3eb3d39fd4115ec2ae341e950357e170d2",
-        "version" : "12.12.0"
+        "revision" : "b77443ca7fa25407869ca537bf3ae912b1427bff",
+        "version" : "12.13.0"
       }
     },
     {
@@ -42,7 +33,7 @@
       "location" : "https://github.com/realm/realm-swift.git",
       "state" : {
         "branch" : "master",
-        "revision" : "e0fdb803ef8d62caa97c2e8ca4f3bd09f5550737"
+        "revision" : "b002cf50fbc21b6f52f3b4e74b15edc4007d5cbc"
       }
     },
     {

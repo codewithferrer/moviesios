@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Kingfisher
+//import Kingfisher
 
 struct ImageView: View {
     
@@ -15,7 +15,7 @@ struct ImageView: View {
     
     var body: some View {
         GeometryReader { geo in
-            if let urlImage = urlImage, let image = URL(string: urlImage) {
+             /*if let urlImage = urlImage, let image = URL(string: urlImage) {
                 
                 KFImage.url(image)
                     .renderingMode(.original)
@@ -30,13 +30,13 @@ struct ImageView: View {
                     .clipped()
                     
                 
-            } else {
+            } else {*/
                 Image(placeholderImage)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(maxWidth: geo.size.width, maxHeight: geo.size.height)
                     .clipped()
-            }
+           // }
             
         }
     }
