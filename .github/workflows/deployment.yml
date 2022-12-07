@@ -83,16 +83,19 @@ jobs:
         env:
           API_KEY_BASE64: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
         run: | 
-          mkdir -p ~/private_keys
-          ls ~/private_keys
-          echo -n "$API_KEY_BASE64" | base64 --decode --output ~/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
+          mkdir -p $RUNNER_TEMP/private_keys
+          ls $RUNNER_TEMP/private_keys
+          echo -n "$API_KEY_BASE64" | base64 --decode --output $RUNNER_TEMP/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
           echo "After saving: "
-          ls ~/private_keys
+          ls $RUNNER_TEMP/private_keys
       
       - name: Upload file to testFlight
+        env:
+          API_PRIVATE_KEYS_DIR: ${{ runner.temp }}/private_keys
         run: |
           echo "Start upload"
-          ls ~/private_keys
+          ls $API_PRIVATE_KEYS_DIR
+          
           xcrun altool --validate-app -f $RUNNER_TEMP/export/movies.ipa \
                 -t ios \
                 --apiKey ${{ secrets.APPSTORE_API_KEY_ID }} \
@@ -111,4 +114,4 @@ jobs:
           security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
           rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
           rm ~/Library/MobileDevice/Provisioning\ Profiles/moviesapp_profile.mobileprovision
-          rm ~/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
+          rm ${{ runner.temp }}/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
