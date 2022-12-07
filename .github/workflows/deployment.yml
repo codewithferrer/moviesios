@@ -106,8 +106,6 @@ jobs:
                 --apiKey ${{ secrets.APPSTORE_API_KEY_ID }} \
                 --apiIssuer ${{ secrets.APPSTORE_ISSUER_ID }}
           
-      
-          
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
         run: |
