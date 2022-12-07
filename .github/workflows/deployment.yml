@@ -1,6 +1,9 @@
 name: App build
 
-on: push
+on: 
+  push:
+    tags:
+      - release.**
 
 jobs:
   build_with_signing:
