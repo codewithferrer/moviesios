@@ -112,4 +112,4 @@ jobs:
           security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
           rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
           rm ~/Library/MobileDevice/Provisioning\ Profiles/moviesapp_profile.mobileprovision
-          rm ${{ runner.temp }}/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
+          rm -i ${{ runner.temp }}/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
