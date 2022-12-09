@@ -22,7 +22,7 @@ jobs:
         run: |
           # create variables
           DISTRIBUTION_CERTIFICATE_PATH=$RUNNER_TEMP/distribution_certificate.p12
-          DIST_PROFILE_PATH=$RUNNER_TEMP/moviesapp_profile.mobileprovision
+          DIST_PROFILE_PATH=$RUNNER_TEMP/movies_app.mobileprovision
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
           
           # import certificate and provisioning profile from secrets
@@ -101,5 +101,5 @@ jobs:
         if: ${{ always() }}
         run: |
           security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-          rm ~/Library/MobileDevice/Provisioning\ Profiles/moviesapp_profile.mobileprovision
+          rm ~/Library/MobileDevice/Provisioning\ Profiles/movies_app.mobileprovision
           rm ${{ runner.temp }}/private_keys/AuthKey_${{ secrets.APPSTORE_API_KEY_ID }}.p8
