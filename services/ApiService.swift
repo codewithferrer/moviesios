@@ -35,12 +35,16 @@ protocol ApiServiceProtocol {
 
 class ApiRestClient {
     
-    private let urlBase: String = "https://api.themoviedb.org/3/movie/"
-    private let APIKEY_NAME: String = "api_key"
-    private let configuration: Configuration
+    private let configuration: ConfigurationProtocol
+    private let sessionManager: Session
     
-    public init(configuration: Configuration) {
+    public init(configuration: ConfigurationProtocol) {
         self.configuration = configuration
+        
+        let afConfiguration = URLSessionConfiguration.af.default
+        afConfiguration.protocolClasses = configuration.protocolClasses + (afConfiguration.protocolClasses ?? [])
+
+        self.sessionManager = Session(configuration: afConfiguration)
     }
 }
 
@@ -48,22 +52,22 @@ extension ApiRestClient: ApiServiceProtocol {
     
     func fetchPopularMovies(page: Int) -> AnyPublisher<DataResponse<ApiObjectPaginator<ApiObjectMovie>, ApiRestError>, Never> {
         guard let apiKey = configuration.apiKey,
-            let url = URL(string: "\(urlBase)popular?page=\(page)&\(APIKEY_NAME)=\(apiKey)") else {
+              let url = URL(string: "\(configuration.urlBase)popular?page=\(page)&\(configuration.APIKEY_NAME)=\(apiKey)") else {
                 return emptyPublisher(error: ConfigError(code: 555, message: "No URL defined"))
         }
         
-        return AF.request(url, method: .get)
+        return sessionManager.request(url, method: .get)
             .proccessResponse(type: ApiObjectPaginator<ApiObjectMovie>.self)
             
     }
     
     func fetchMovie(movieId: String) -> AnyPublisher<DataResponse<ApiObjectMovie, ApiRestError>, Never> {
         guard let apiKey = configuration.apiKey,
-            let url = URL(string: "\(urlBase)\(movieId)?\(APIKEY_NAME)=\(apiKey)") else {
+              let url = URL(string: "\(configuration.urlBase)\(movieId)?\(configuration.APIKEY_NAME)=\(apiKey)") else {
                  return emptyPublisher(error: ConfigError(code: 555, message: "No URL defined"))
         }
         
-        return AF.request(url, method: .get)
+        return sessionManager.request(url, method: .get)
             .proccessResponse(type: ApiObjectMovie.self)
     }
     

@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "AF4B8BB0-674E-4CB3-8BD6-21BEF5F3CC95",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:movies.xcodeproj",
+        "identifier" : "AFFEEA1B2872A6BD00220586",
+        "name" : "moviesTests"
+      }
+    }
+  ],
+  "version" : 1
+}
