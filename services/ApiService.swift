@@ -44,7 +44,8 @@ class ApiRestClient {
         let afConfiguration = URLSessionConfiguration.af.default
         afConfiguration.protocolClasses = configuration.protocolClasses + (afConfiguration.protocolClasses ?? [])
 
-        self.sessionManager = Session(configuration: afConfiguration)
+        self.sessionManager = Session(configuration: afConfiguration,
+                                      eventMonitors: [ AlamofireLogger(logLevel: configuration.logLevel) ])
     }
 }
 

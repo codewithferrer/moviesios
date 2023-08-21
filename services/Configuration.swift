@@ -13,6 +13,7 @@ protocol ConfigurationProtocol {
     var urlBase: String { get }
     var APIKEY_NAME: String { get }
     var protocolClasses: [AnyClass] { get }
+    var logLevel: AlamofireLogger.LogLevel { get }
 }
 
 class Configuration: ConfigurationProtocol {
@@ -25,5 +26,7 @@ class Configuration: ConfigurationProtocol {
     let APIKEY_NAME: String = "api_key"
     
     let protocolClasses: [AnyClass] = []
+    
+    let logLevel: AlamofireLogger.LogLevel = .Headers
     
 }

@@ -34,6 +34,7 @@
 		AF84F0CD2887B742005CE41D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F0CC2887B742005CE41D /* Movie.swift */; };
 		AF84F0D02887B79B005CE41D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F0CF2887B79B005CE41D /* HomeViewModel.swift */; };
 		AF84F0D52887B805005CE41D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F0D42887B805005CE41D /* HomeView.swift */; };
+		AFF13E902A931D22007BDEA1 /* AlamofireLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF13E8F2A931D22007BDEA1 /* AlamofireLogger.swift */; };
 		AFF3F36328A4C27D000EB305 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF3F36228A4C27D000EB305 /* Configuration.swift */; };
 		AFF5968028B11A1600069838 /* ApiObjectPaginator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF5967F28B11A1600069838 /* ApiObjectPaginator.swift */; };
 		AFF5968228B11AD800069838 /* ApiObjectMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF5968128B11AD800069838 /* ApiObjectMovie.swift */; };
@@ -83,12 +84,13 @@
 		AF4C18142992539B00C1D01D /* MockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedData.swift; sourceTree = "<group>"; };
 		AF4C18172992553D00C1D01D /* Mocker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocker.swift; sourceTree = "<group>"; };
 		AF4C181F2994BD7300C1D01D /* ApiServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceTest.swift; sourceTree = "<group>"; };
-		AF4C18222997AB6F00C1D01D /* movies.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; name = movies.xctestplan; path = moviesTests/movies.xctestplan; sourceTree = SOURCE_ROOT; };
+		AF4C18222997AB6F00C1D01D /* movies.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = movies.xctestplan; path = moviesTests/movies.xctestplan; sourceTree = SOURCE_ROOT; };
 		AF4C33E128EE8E4500CE0183 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		AF70CC6228DEC425006A7D8F /* MovieDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDB.swift; sourceTree = "<group>"; };
 		AF84F0CC2887B742005CE41D /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		AF84F0CF2887B79B005CE41D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		AF84F0D42887B805005CE41D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AFF13E8F2A931D22007BDEA1 /* AlamofireLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireLogger.swift; sourceTree = "<group>"; };
 		AFF3F35E28A36FAD000EB305 /* ConfigKeys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = ConfigKeys.xcconfig; sourceTree = "<group>"; };
 		AFF3F36028A4C19D000EB305 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFF3F36228A4C27D000EB305 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			children = (
 				AFF3F36228A4C27D000EB305 /* Configuration.swift */,
 				AFF5968328B11C2200069838 /* ApiService.swift */,
+				AFF13E8F2A931D22007BDEA1 /* AlamofireLogger.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF13E902A931D22007BDEA1 /* AlamofireLogger.swift in Sources */,
 				AF4C33E228EE8E4500CE0183 /* ImageView.swift in Sources */,
 				AF4377642903C3A50012A728 /* MoviesRepository.swift in Sources */,
 				AF70CC6328DEC425006A7D8F /* MovieDB.swift in Sources */,
