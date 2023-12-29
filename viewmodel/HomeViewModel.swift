@@ -12,7 +12,7 @@ import RealmSwift
 
 class HomeViewModel: ObservableObject {
     
-    @Injected(Container.moviesRepository) private var repository: MoviesRepository
+    @Injected(\.moviesRepository) private var repository: MoviesRepository
     
     private var cancellableSet: Set<AnyCancellable> = []
     

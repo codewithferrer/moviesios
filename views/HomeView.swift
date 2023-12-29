@@ -10,7 +10,7 @@ import Factory
 
 struct HomeView: View {
     
-    @ObservedObject var viewModel: HomeViewModel = Container.homeViewModel()
+    @StateObject var viewModel: HomeViewModel = Container.shared.homeViewModel()
     
     let columns = [
         GridItem(.flexible()),
@@ -99,7 +99,7 @@ struct MovieViewCell: View {
 #if DEBUG
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        let _ = Container.homeViewModel.register { MockHomeViewModel() }
+        let _ = Container.shared.homeViewModel.register { MockHomeViewModel() }
         HomeView()
     }
 }

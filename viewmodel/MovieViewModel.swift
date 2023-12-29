@@ -12,7 +12,7 @@ import RealmSwift
 
 class MovieViewModel: ObservableObject {
     
-    @Injected(Container.movieRepository) private var repository: MovieRepository
+    @Injected(\.movieRepository) private var repository: MovieRepository
     
     @Published var movie: Movie? = nil
     

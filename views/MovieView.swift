@@ -10,7 +10,7 @@ import Factory
 
 struct MovieView: View {
     
-    @ObservedObject var viewModel: MovieViewModel = Container.movieViewModel()
+    @StateObject var viewModel: MovieViewModel = Container.shared.movieViewModel()
     
     var movieId: String
     
@@ -39,7 +39,7 @@ struct MovieView: View {
 #if DEBUG
 struct MovieView_Previews: PreviewProvider {
     static var previews: some View {
-        let _ = Container.movieViewModel.register { MockMovieViewModel() }
+        let _ = Container.shared.movieViewModel.register { MockMovieViewModel() }
         MovieView(movieId: moviesTest[0].id)
     }
 }

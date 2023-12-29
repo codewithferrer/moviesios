@@ -11,42 +11,54 @@ import RealmDataManager
 
 extension Container {
     
-    static let configurationService = Factory(scope: .singleton) {
-        Configuration()
+    var configurationService: Factory<Configuration> {
+        self { Configuration() }.singleton
     }
     
-    static let apiRestClientService = Factory(scope: .singleton) {
-        ApiRestClient(configuration: configurationService())
+    var apiRestClientService: Factory<ApiRestClient> {
+        self { ApiRestClient(configuration: self.configurationService()) }.singleton
     }
     
-    static let databaseManager = Factory(scope: .singleton) {
-        let configuration = DatabaseConfiguration(
-            databaseName: "movies",
-            type: .disk,
-            debug: .all,
-            schemaVersion: 1,
-            objectTypes: [MovieDB.self]
-        )
-        
-        return LocalDatabaseManager(configuration: configuration) as Database
+    var databaseManager: Factory<Database> {
+        self {
+            let configuration = DatabaseConfiguration(
+                databaseName: "movies",
+                type: .disk,
+                debug: .all,
+                schemaVersion: 1,
+                objectTypes: [MovieDB.self]
+            )
+            
+            return LocalDatabaseManager(configuration: configuration) as Database
+        }.singleton
     }
     
     //ViewModels
-    static let homeViewModel = Factory() {
-        HomeViewModel()
+    var homeViewModel: Factory<HomeViewModel> {
+        self { HomeViewModel() }
     }
     
-    static let movieViewModel = Factory() {
-        MovieViewModel()
+    var movieViewModel: Factory<MovieViewModel> {
+        self { MovieViewModel() }
     }
     
     //Repositories
-    static let moviesRepository = Factory() {
-        MoviesRepository(apiRestClient: apiRestClientService(), databaseManager: databaseManager(), configuration: configurationService())
+    var moviesRepository: Factory<MoviesRepository> {
+        self {
+            MoviesRepository(apiRestClient: self.apiRestClientService(),
+                             databaseManager: self.databaseManager(),
+                             configuration: self.configurationService()
+            )
+        }
     }
     
-    static let movieRepository = Factory() {
-        MovieRepository(apiRestClient: apiRestClientService(), databaseManager: databaseManager(), configuration: configurationService())
+    var movieRepository: Factory<MovieRepository> {
+        self {
+            MovieRepository(apiRestClient: self.apiRestClientService(),
+                            databaseManager: self.databaseManager(),
+                            configuration: self.configurationService()
+            )
+        }
     }
     
 }
