@@ -95,9 +95,9 @@ open class NetworkBoundResource<ResultType, DatabaseRequestType: Object, ApiRequ
         if self.loadMoreState.isRunning || !self.loadMoreState.hasMorePages {
             return
         }
-        
-        self.loadMoreState = LoadMoreState(isRunning: true, hasMorePages: true)
-        
+        await MainActor.run {
+            self.loadMoreState = LoadMoreState(isRunning: true, hasMorePages: hasMorePages)
+        }
         numPage += 1
         loadFromAPI(page: numPage)
     }
