@@ -5,18 +5,18 @@
 //  Created by Daniel Ferrer on 24/9/22.
 //
 
-import RealmSwift
+import SwiftData
 
-class MovieDB: Object {
+@Model
+final class MovieDB: Identifiable {
     
-    @Persisted(primaryKey: true) var id: String
-    @Persisted var imdbId: String?
-    @Persisted var title: String
-    @Persisted var overView: String
-    @Persisted var posterPath: String?
+    @Attribute(.unique) var id: String
+    var imdbId: String?
+    var title: String
+    var overView: String
+    var posterPath: String?
     
-    convenience init(id: String, imdbId: String?, title: String, overView: String, posterPath: String?) {
-        self.init()
+    init(id: String, imdbId: String?, title: String, overView: String, posterPath: String?) {
         self.id = id
         self.imdbId = imdbId
         self.title = title

@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import Factory
 import RealmSwift
+import SwiftData
 
 class HomeViewModel: ObservableObject {
     
@@ -30,11 +31,15 @@ class HomeViewModel: ObservableObject {
     }
     
     func loadMovies() {
-        repository.loadMovies()
+        Task {
+            await repository.loadMovies()
+        }
     }
     
     func loadNextPage() {
-        repository.fetchNextPage()
+        Task {
+            await repository.fetchNextPage()
+        }
     }
     
 }
@@ -49,7 +54,7 @@ struct LoadMoreState {
 class MockHomeViewModel: HomeViewModel {
     
     override func loadMovies() {
-        self.movies = moviesTest
+        
     }
 
 }

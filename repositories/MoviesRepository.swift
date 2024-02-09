@@ -9,55 +9,53 @@ import Foundation
 import Combine
 import Alamofire
 import SwiftUI
-import RealmSwift
-import RealmDataManager
 
 class MoviesRepository: NetworkBoundResource<[Movie], MovieDB, ApiObjectPaginator<ApiObjectMovie>> {
     
     private var apiRestClient: ApiServiceProtocol
-    private var databaseManager: Database
     private var configuration: ConfigurationProtocol
+    private var modelActor: MoviesModelActor
     
-    
-    
-    init(apiRestClient: ApiServiceProtocol, databaseManager: Database, configuration: ConfigurationProtocol) {
+    init(apiRestClient: ApiServiceProtocol,
+         modelActor: MoviesModelActor,
+         configuration: ConfigurationProtocol) {
         self.apiRestClient = apiRestClient
-        self.databaseManager = databaseManager
+        self.modelActor = modelActor
         self.configuration = configuration
     }
     
-    func loadMovies() {
-        fetch()
+    func loadMovies() async {
+        await fetch()
     }
     
-    override func fetchDatabase() throws -> Results<MovieDB>? {
-        return try databaseManager.get(type: MovieDB.self)
+    override func fetchDatabase() async throws -> AnyPublisher<[MovieDB], Never>? {
+        return await modelActor.getMoviesPublisher()
     }
     
-    override func convertFromDatabaseToResults(data: Results<MovieDB>) -> [Movie]? {
+    override func convertFromDatabaseToResults(data: [MovieDB]) -> [Movie]? {
         return data.compactMap {
             Movie(id: $0.id, imdbId: $0.imdbId, title: $0.title, overView: $0.overView, posterPath: $0.posterPath)
         }
     }
     
-    override func fetchWS(page: Int) -> AnyPublisher<DataResponse<ApiObjectPaginator<ApiObjectMovie>, ApiRestError>, Never>? {
-        return apiRestClient.fetchPopularMovies(page: page)
+    override func fetchWS(page: Int) async -> ApiObjectPaginator<ApiObjectMovie>? {
+        return await apiRestClient.popularMovies(page: page)
     }
     
-    override func saveFromAPIToDatabase(response: DataResponse<ApiObjectPaginator<ApiObjectMovie>, ApiRestError>) {
-        let objects: [Object] = response.value?.results.compactMap({ apiItem in
+    override func saveFromAPIToDatabase(response: ApiObjectPaginator<ApiObjectMovie>) async {
+        let objects: [MovieDB] = response.results.compactMap({ apiItem in
             MovieDB.build(apiItem: apiItem, urlImages: self.configuration.urlImages)
-        }) ?? []
+        })
         
         if numPage == 1 {
-            try? self.databaseManager.delete(type: MovieDB.self)
+            await self.modelActor.deleteMovies()
         }
         
-        try? self.databaseManager.save(objects: objects)
+        await self.modelActor.saveObjects(objects: objects)
     }
     
-    override func hasMorePages(response: DataResponse<ApiObjectPaginator<ApiObjectMovie>, ApiRestError>) -> Bool {
-        return response.value?.results.count ?? 0 > 0
+    override func hasMorePages(response: ApiObjectPaginator<ApiObjectMovie>) async -> Bool {
+        return response.results.count > 0
     }
     
 }

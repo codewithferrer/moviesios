@@ -10,95 +10,104 @@ import Combine
 import Alamofire
 import SwiftUI
 import RealmSwift
+import SwiftData
 
 
 protocol NetworkBoundResourceProtocol: ObservableObject {
     associatedtype ResultType
-    associatedtype DatabaseRequestType: Object
+    associatedtype DatabaseRequestType: PersistentModel
     associatedtype ApiRequestType: Codable
     
     var result: ResultType? { get set }
     var loadMoreState: LoadMoreState { get set }
     
-
-    func fetchDatabase() throws -> Results<DatabaseRequestType>?
-    func convertFromDatabaseToResults(data: Results<DatabaseRequestType>) -> ResultType?
     
-    func fetchWS(page: Int) -> AnyPublisher<DataResponse<ApiRequestType, ApiRestError>, Never>?
-    func saveFromAPIToDatabase(response: DataResponse<ApiRequestType, ApiRestError>)
-    func hasMorePages(response: DataResponse<ApiRequestType, ApiRestError>) -> Bool
+    func fetchDatabase() async throws -> AnyPublisher<[DatabaseRequestType], Never>?
+    func convertFromDatabaseToResults(data: [DatabaseRequestType]) -> ResultType?
+    
+    func fetchWS(page: Int) async -> ApiRequestType?
+    func saveFromAPIToDatabase(response: ApiRequestType) async
+    func hasMorePages(response: ApiRequestType) async -> Bool
 }
 
-open class NetworkBoundResource<ResultType, DatabaseRequestType: Object, ApiRequestType: Codable>: NetworkBoundResourceProtocol {
+open class NetworkBoundResource<ResultType, DatabaseRequestType: PersistentModel, ApiRequestType: Codable>: NetworkBoundResourceProtocol {
     @Published var result: ResultType? = nil
     @Published var loadMoreState: LoadMoreState = LoadMoreState(isRunning: false, hasMorePages: true)
     
     internal var cancellableSet: Set<AnyCancellable> = []
     internal var numPage: Int = 0
+    internal var isRunning: Bool = false
+    internal var hasMorePages: Bool = true
     
-    func fetchDatabase() throws -> Results<DatabaseRequestType>? {
+    func fetchDatabase() async throws -> AnyPublisher<[DatabaseRequestType], Never>? {
         return nil
     }
     
-    func convertFromDatabaseToResults(data: Results<DatabaseRequestType>) -> ResultType? {
+    func convertFromDatabaseToResults(data: [DatabaseRequestType]) -> ResultType? {
         return nil
     }
     
-    func fetchWS(page: Int) -> AnyPublisher<DataResponse<ApiRequestType, ApiRestError>, Never>? {
+    func fetchWS(page: Int) async -> ApiRequestType? {
         return nil
     }
     
-    func saveFromAPIToDatabase(response: DataResponse<ApiRequestType, ApiRestError>) {
+    func saveFromAPIToDatabase(response: ApiRequestType) async {
         
     }
     
-    func hasMorePages(response: DataResponse<ApiRequestType, ApiRestError>) -> Bool {
+    func hasMorePages(response: ApiRequestType) async -> Bool {
         return true
     }
     
-    func fetch() {
+    func fetch() async {
+        if numPage == 0 {
+            await loadFromDatabase()
+        }
         
-        fetchNextPage()
-        
-        loadFromDatabase()
+        await fetchNextPage()
     }
     
-    func loadFromDatabase() {
-        try? fetchDatabase()?
-            .collectionPublisher
+    func loadFromDatabase() async {
+        try? await fetchDatabase()?
             .subscribe(on: DispatchQueue(label: "background queue"))
-            .freeze()
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in
-            },receiveValue: { results in
+            .sink(receiveCompletion: { _ in }, receiveValue: { results in
                 self.result = self.convertFromDatabaseToResults(data: results)
             })
             .store(in: &cancellableSet)
+            
     }
     
-    private func loadFromAPI(page: Int) {
-        fetchWS(page: page)?
-            .sink { (dataResponse) in
-                if dataResponse.error != nil {
-                    print(dataResponse.error.debugDescription)
-                    self.loadMoreState = LoadMoreState(isRunning: false, hasMorePages: false)
-                } else {
-                    self.saveFromAPIToDatabase(response: dataResponse)
-                    
-                    self.loadMoreState = LoadMoreState(isRunning: false, hasMorePages: self.hasMorePages(response: dataResponse))
-                }
+    private func loadFromAPI(page: Int) async {
+        isRunning = true
+        let response = await fetchWS(page: page)
+        
+        if let value = response {
+            await self.saveFromAPIToDatabase(response: value)
+            let _hasMorePages = await self.hasMorePages(response: value)
+            hasMorePages = _hasMorePages
+            isRunning = false
+            await MainActor.run {
+                self.loadMoreState = LoadMoreState(isRunning: false, hasMorePages: _hasMorePages)
             }
-            .store(in: &cancellableSet)
+        } else {
+            hasMorePages = false
+            isRunning = false
+            await MainActor.run {
+                self.loadMoreState = LoadMoreState(isRunning: false, hasMorePages: false)
+            }
+        }
     }
     
-    func fetchNextPage() {
-        if self.loadMoreState.isRunning || !self.loadMoreState.hasMorePages {
+    func fetchNextPage() async {
+        if self.isRunning || !self.hasMorePages {
             return
         }
+        isRunning = true
         await MainActor.run {
-            self.loadMoreState = LoadMoreState(isRunning: true, hasMorePages: hasMorePages)
+            self.loadMoreState = LoadMoreState(isRunning: isRunning, hasMorePages: hasMorePages)
         }
         numPage += 1
-        loadFromAPI(page: numPage)
+        await loadFromAPI(page: numPage)
     }
 }

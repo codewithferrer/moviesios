@@ -21,37 +21,21 @@ actor MoviesModelActor: ModelActor {
       modelExecutor = DefaultSerialModelExecutor(modelContext: context)
     }
     
-    func saveMovies(movies: [Movie]) {
-        movies.forEach { movie in
-            context.insert(movie)
-        }
-        try? context.save()
-    }
-    
     func deleteMovies() {
-        try? context.delete(model: Movie.self)
+        try? context.delete(model: MovieDB.self)
     }
     
-    func getMovies() -> [Movie] {
-        let fetchDescriptor: FetchDescriptor<Movie> = FetchDescriptor()
+    func getMoviesPublisher() -> AnyPublisher<[MovieDB], Never>? {
         
-        return (try? context.fetch(fetchDescriptor)) ?? []
+        let fetchDescriptor: FetchDescriptor<MovieDB> = FetchDescriptor()
+        return try? context.fetch(fetchDescriptor).publisher.collect().eraseToAnyPublisher()
     }
     
-    func getMoviesPublisher() -> AnyPublisher<[Movie], Never>? {
-        
-        let fetchDescriptor: FetchDescriptor<Movie> = FetchDescriptor()
-        return try? (context.fetch(fetchDescriptor).publisher.collect().eraseToAnyPublisher())
-    }
-    
-    func getMoviePublisher(movieId: String) -> AnyPublisher<[Movie], Never>? {
-        let fetchDescriptor: FetchDescriptor<Movie> = FetchDescriptor(predicate: #Predicate<Movie> {
+    func getMoviePublisher(movieId: String) -> AnyPublisher<[MovieDB], Never>? {
+        let fetchDescriptor: FetchDescriptor<MovieDB> = FetchDescriptor(predicate: #Predicate<MovieDB> {
             $0.id == movieId
         })
         return try? context.fetch(fetchDescriptor).publisher.collect()
-            /*.map({
-                $0.first
-            })*/
             .eraseToAnyPublisher()
     }
     

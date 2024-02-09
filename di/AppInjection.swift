@@ -7,7 +7,7 @@
 
 import Foundation
 import Factory
-import RealmDataManager
+import SwiftData
 
 extension Container {
     
@@ -19,17 +19,30 @@ extension Container {
         self { ApiRestClient(configuration: self.configurationService()) }.singleton
     }
     
-    var databaseManager: Factory<Database> {
+    var modelContainerService: Factory<ModelContainer> {
         self {
-            let configuration = DatabaseConfiguration(
-                databaseName: "movies",
-                type: .disk,
-                debug: .all,
-                schemaVersion: 1,
-                objectTypes: [MovieDB.self]
-            )
             
-            return LocalDatabaseManager(configuration: configuration) as Database
+            let sharedModelContainer: ModelContainer = {
+                let schema = Schema([
+                    MovieDB.self,
+                ])
+                let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+                do {
+                    return try ModelContainer(for: schema, configurations: [modelConfiguration])
+                } catch {
+                    fatalError("Could not create ModelContainer: \(error)")
+                }
+            }()
+            
+            return sharedModelContainer
+            
+        }.singleton
+    }
+    
+    var moviesModelActor: Factory<MoviesModelActor> {
+        self {
+            MoviesModelActor(modelContainer: self.modelContainerService())
         }.singleton
     }
     
@@ -46,7 +59,7 @@ extension Container {
     var moviesRepository: Factory<MoviesRepository> {
         self {
             MoviesRepository(apiRestClient: self.apiRestClientService(),
-                             databaseManager: self.databaseManager(),
+                             modelActor: self.moviesModelActor(),
                              configuration: self.configurationService()
             )
         }
@@ -55,7 +68,7 @@ extension Container {
     var movieRepository: Factory<MovieRepository> {
         self {
             MovieRepository(apiRestClient: self.apiRestClientService(),
-                            databaseManager: self.databaseManager(),
+                            modelActor: self.moviesModelActor(),
                             configuration: self.configurationService()
             )
         }

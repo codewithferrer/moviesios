@@ -29,7 +29,11 @@ protocol ApiServiceProtocol {
     
     func fetchPopularMovies(page: Int) -> AnyPublisher<DataResponse<ApiObjectPaginator<ApiObjectMovie>, ApiRestError>, Never>
     
+    func popularMovies(page: Int) async -> ApiObjectPaginator<ApiObjectMovie>?
+    
     func fetchMovie(movieId: String) -> AnyPublisher<DataResponse<ApiObjectMovie, ApiRestError>, Never>
+    
+    func movie(movieId: String) async -> ApiObjectMovie?
     
 }
 
@@ -62,6 +66,14 @@ extension ApiRestClient: ApiServiceProtocol {
             
     }
     
+    func popularMovies(page: Int) async -> ApiObjectPaginator<ApiObjectMovie>? {
+        guard let apiKey = configuration.apiKey,
+              let url = URL(string: "\(configuration.urlBase)popular?page=\(page)&\(configuration.APIKEY_NAME)=\(apiKey)") else {
+                return nil
+        }
+        return await sessionManager.request(url, method: .get).processValue(type: ApiObjectPaginator<ApiObjectMovie>.self)
+    }
+    
     func fetchMovie(movieId: String) -> AnyPublisher<DataResponse<ApiObjectMovie, ApiRestError>, Never> {
         guard let apiKey = configuration.apiKey,
               let url = URL(string: "\(configuration.urlBase)\(movieId)?\(configuration.APIKEY_NAME)=\(apiKey)") else {
@@ -70,6 +82,15 @@ extension ApiRestClient: ApiServiceProtocol {
         
         return sessionManager.request(url, method: .get)
             .proccessResponse(type: ApiObjectMovie.self)
+    }
+    
+    func movie(movieId: String) async -> ApiObjectMovie? {
+        guard let apiKey = configuration.apiKey,
+              let url = URL(string: "\(configuration.urlBase)\(movieId)?\(configuration.APIKEY_NAME)=\(apiKey)") else {
+                 return nil
+        }
+        
+        return await sessionManager.request(url, method: .get).processValue(type: ApiObjectMovie.self)
     }
     
     
@@ -104,6 +125,12 @@ extension DataRequest {
         }
         .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
+    }
+    
+    func processValue<T: Codable>(type: T.Type) async -> T? {
+        return try? await validate()
+            .serializingDecodable(type.self)
+            .value
     }
     
 }

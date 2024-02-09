@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 import Factory
-import RealmSwift
 
 class MovieViewModel: ObservableObject {
     
@@ -25,7 +24,9 @@ class MovieViewModel: ObservableObject {
     }
     
     func loadMovie(movieId: String) {
-        repository.loadMovie(movieId: movieId)
+        Task {
+            await repository.loadMovie(movieId: movieId)
+        }
     }
     
 }
